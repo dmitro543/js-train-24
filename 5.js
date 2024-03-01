@@ -13,6 +13,27 @@ function task5() {
   // Обробляємо помилку, якщо вона виникне
   // Ми використовуємо .finally метод для виконання дій незалежно від того, в якому стані завершився наш проміс, та виводимо повідомлення "Завершення лічильника"
   // Виконуємо код після завершення проміса
+  let counter = 0;
+  const intervalPromise = new Promise((resolve, reject) => {
+    const timer = setInterval(() => {
+      counter++;
+      console.log(`Значення лічильника: ${counter}`);
+      if (counter === 5) {
+        clearInterval(timer);
+        resolve(counter);
+      }
+    }, 1000);
+  });
+  intervalPromise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  .finally(() => {
+    console.log("Завершення лічильника");
+  })
 }
 // Викликаємо функцію task5
 task5();
